@@ -44,3 +44,7 @@ const holdScore = () => {
 }
 holdBtn.addEventListener('click', holdScore)
 rollBtn.addEventListener('click', rollDice)
+
+
+console.log("test commit");
+
