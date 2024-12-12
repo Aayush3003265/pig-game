@@ -4,47 +4,37 @@ const diceImage = document.getElementById('dice')
 const current0 = document.getElementById('current--0')
 const holdBtn = document.getElementById('btn--hold')
 const scorePlayerOne = document.getElementById('score--0')
-let counter = +scorePlayerOne.innerHTML;
+const whichActive = document.querySelectorAll('#player');
+let counter1 = +scorePlayerOne.innerHTML;
 const rollDice = () => {
     const diceNum = Math.floor(Math.random() * 6 + 1)
     console.log(diceNum);
+    diceImage.src = `dice-${diceNum}.png`;
     if (diceNum === 1) {
-        diceImage.src = "dice-1.png"
-        counter = 0;
+        counter1 = 0;
         current0.innerHTML = 0;
-    } else if (diceNum === 2) {
-        diceImage.src = "dice-2.png"
-        current0.innerHTML = counter += diceNum
-    } else if (diceNum === 3) {
-        diceImage.src = "dice-3.png"
-        current0.innerHTML = counter += diceNum
-    } else if (diceNum === 4) {
-        diceImage.src = "dice-4.png"
-        current0.innerHTML = counter += diceNum
-    } else if (diceNum === 5) {
-        diceImage.src = "dice-5.png"
-        current0.innerHTML = counter += diceNum
-    } else if (diceNum === 6) {
-        diceImage.src = "dice-6.png"
-        current0.innerHTML = counter += diceNum
+        switchPlayer();
+    } else {
+        current0.innerHTML = counter1 += diceNum;
     }
     return diceNum;
 }
 
 const holdScore = () => {
-
-    if (scorePlayerOne.innerHTML === counter) {
-        counter += diceNum
-    } else {
-        scorePlayerOne.innerHTML = counter;
-        current0.innerHTML = 0;
-        counter = 0;
-    }
-
+    scorePlayerOne.innerHTML = counter1;
+    current0.innerHTML = 0;
+    counter1 = 0;
+    switchPlayer();
 }
+function switchPlayer() {
+    if (whichActive[0].classList.contains('player--active')) {
+        whichActive[1].classList.add('player--active');
+        whichActive[0].classList.remove('player--active');
+    } else {
+        whichActive[0].classList.add('player--active');
+        whichActive[1].classList.remove('player--active');
+    }
+}
+
 holdBtn.addEventListener('click', holdScore)
 rollBtn.addEventListener('click', rollDice)
-
-
-console.log("test commit");
-
